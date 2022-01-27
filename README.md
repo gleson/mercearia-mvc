@@ -4,8 +4,10 @@ Este projeto é um Sistema MVC desenvolvido em Python, que executa as principais
 ### Este sistema contempla as seguintes tabelas:
 
 **Categoria**
+
 *Campos:*
 - Categoria
+
 *Operações:*
 - Cadastro
 - Alteração
