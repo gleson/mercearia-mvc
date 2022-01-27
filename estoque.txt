@@ -1,0 +1,4 @@
+Banana | 1.5 | Frutas | 4
+Laranja | 2.3 | Frutas | 1
+Acerola | 4.4 | Frutas | 2
+Manga | 4.1 | Frutas | 5

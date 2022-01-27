@@ -1,0 +1,8 @@
+Laranja | 3 | Frutas | Caio | Gleson | 3 | 21/01/2022
+Acerola | 5 | Frutas | Caio | Gleson | 3 | 21/01/2022
+Laranja | 2 | Frutas | Caio | Gleson | 7 | 21/01/2022
+Banana | 1.5 | Frutas | Caio | Gleson | 6 | 25/01/2022
+Laranja | 2.3 | Frutas | Caio | Gleson | 2 | 25/01/2022
+Laranja | 2.3 | Frutas | Caio | Gleson | 2 | 25/01/2022
+Laranja | 2.3 | Frutas | Caio | Gleson | 2 | 25/01/2022
+Banana | 1.5 | Frutas | Caio | Gleson | 12 | 22/01/2022
