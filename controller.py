@@ -212,9 +212,9 @@ class ControllerVenda:
         print(f'Total vendido: R$ {total}')
 
 
-class ControlerFornecedor:
+class ControllerFornecedor:
     
-    def cadastra_fornecedor(self, nome, cnpj, telefone, categoria):
+    def cadastrar_fornecedor(self, nome, cnpj, telefone, categoria):
         x = DaoFornecedor.ler()
         lista_cnpj = list(filter(lambda x: x.cnpj == cnpj, x))
         lista_telefone = list(filter(lambda x: x.telefone == telefone, x))
@@ -274,30 +274,126 @@ class ControlerFornecedor:
                       f'Categoria: {i.categoria}\n')
 
 
+class ControllerCliente:
+
+    def cadastrar_cliente(self, nome, telefone, cpf, email, endereco):
+        x = DaoPessoa.ler()
+
+        verifica_cpf = list(filter(lambda x: x.cpf == cpf, x))
+        verifica_telefone = list(filter(lambda x: x.telefone == telefone, x))
+
+        if not verifica_cpf:
+            if not verifica_telefone:
+                if len(cpf) == 11 and len(telefone) >= 10 and len(telefone) <= 11:
+                    DaoPessoa.salvar(Pessoa(nome, telefone, cpf, email, endereco))
+                    print('Cliente cadastrado com sucesso!')
+                else:
+                    print('CPF ou telefone incorretos!')
+            else:
+                print('Já existe um cliente com esse telefone cadastrado!')
+        else:
+            print('Já existe um cliente com esse cpf cadastrado!')
+
+    def alterar_cliente(self, nome_atual, novo_nome, novo_telefone, novo_cpf, novo_email, novo_endereco):
+        x = DaoPessoa.ler()
+        verifica_nome = list(filter(lambda x: x.nome == nome_atual, x))
+
+        if verifica_nome:
+            x = list(map(lambda x: Pessoa(novo_nome, novo_telefone, novo_cpf, novo_email, novo_endereco) 
+                         if x.nome == nome_atual else x, x))
+            open('clientes.txt', 'w').close()
+            for i in x:
+                DaoPessoa.salvar(Pessoa(i.nome, i.telefone, i.cpf, i.email, i.endereco))                
+            print('Cliente alterado com sucesso!')
+        else:
+            print('Cliente não encontrado!')
+
+    def remover_cliente(self, nome):
+        x = DaoPessoa.ler()
+        verifica_nome = list(filter(lambda x: x.nome == nome, x))
+
+        if verifica_nome:
+            open('clientes.txt', 'w').close()
+            x = [i for i in x if i.nome != nome]
+            for i in x:
+                DaoPessoa.salvar(Pessoa(i.nome, i.telefone, i.cpf, i.email, i.endereco))                
+            print('Cliente removido com sucesso!')
+        else:
+            print('Cliente não encontrado!')
+
+    def mostrar_clientes(self):
+        x = DaoPessoa.ler()
+
+        if x:
+            for n, i in enumerate(x):
+                print(f'======== Cliente {n+1} ========\n'
+                      f'nome: {i.nome}\n'
+                      f'telefone: {i.telefone}\n'
+                      f'cpf: {i.cpf}\n'
+                      f'email: {i.email}\n'
+                      f'endereco: {i.endereco}\n')
+        else:
+            print('Lista de clientes vazia!')
 
 
-a = ControlerFornecedor()
-# a.alterar_fornecedor('Fornecedor4', 'Fornecedor5', '56789012345678', '66666-1234', 'Legumes')
-# a.alterar_fornecedor('Fornecedor5', 'Fornecedor4', '45678901234567', '77777-1234', 'Legumes')
-# a.remover_fornecedor('Fornecedor4')
-a.mostrar_fornecedores()
+class ControllerFuncionario:
 
+    def cadastrar_funcionario(self, clt, nome, telefone, cpf, email, endereco):
+        x = DaoFuncionario.ler()
+        verifica_cpf = list(filter(lambda x: x.cpf == cpf, x))
+        verifica_clt = list(filter(lambda x: x.clt == clt, x))
 
-# a = ControllerCategoria()
-# a.cadastra_categoria('Verduras')
-# a.mostrar_fornecedores()
+        if verifica_cpf:
+            print('Já existe um funcionário com esse CPF!')
+        elif verifica_clt:
+            print('Já existe um funcionário com essa CLT!')
+        elif len(cpf) == 11 and len(telefone) >= 10 and len(telefone) <= 11:
+            DaoFuncionario.salvar(Funcionario(clt, nome, telefone, cpf, email, endereco))
+            print('Funcionário cadastrado com sucesso!')
+        else:
+            print('Digite um CPF ou telefone válido!')
 
-#prod = list(filter(lambda x: x.produto.nome == nome_produto, x))
-#a = ControllerEstoque()
-#a.cadastrar_produto('Banana', 1.50, 'Frutas', 10)
-#a.cadastrar_produto('Laranja', 2.30, 'Frutas', 7)
-#a.cadastrar_produto('Acerola', 4.40, 'Frutas', 2)
-#a.cadastrar_produto('Manga', 4.10, 'Frutas', 5)
+    def alterar_funcionario(self, nome_atual, nova_clt, novo_nome, novo_telefone, novo_cpf, novo_email, novo_endereco):
+        x = DaoFuncionario.ler()
 
-#a.remover_produto('Acerola')
-#a.alterar_produto('Manga', 'Manga', '4.15', 'Frutas', 5)
-#a.mostrar_estoque()
+        verifica_nome = list(filter(lambda x: x.nome == nome_atual, x))
+        if not verifica_nome:
+            print('Funcionário não encontrado!')
+        elif len(novo_cpf) == 11 and len(novo_telefone) >= 10 and len(novo_telefone) <= 11:
+            x = list(map(lambda x: Funcionario(nova_clt, novo_nome, novo_telefone, novo_cpf, novo_email, novo_endereco) 
+                         if x.nome == nome_atual else x, x))
+            open('funcionarios.txt', 'w').close()
+            for i in x:
+                DaoFuncionario.salvar(Funcionario(i.clt, i.nome, i.telefone, i.cpf, i.email, i.endereco))
+            print('Funcionário alterado com sucesso!')
+        else:
+            print('Digite um CPF ou telefone válido!')
 
-#a = ControllerVenda()
-#a.cadastrar_venda('Laranjada', 'Caio', 'Gleson', 2)
-#a.mostrar_venda('24/01/2022', '25/01/2022')
+    def remover_funcionario(self, nome):
+        x = DaoFuncionario.ler()
+
+        verifica_nome = list(filter(lambda x: x.nome == nome, x))
+        if not verifica_nome:
+            print('Funcionário não encontrado!')
+        else:
+            x = [i for i in x if i.nome != nome]
+            open('funcionarios.txt', 'w').close()
+            for i in x:
+                DaoFuncionario.salvar(Funcionario(i.clt, i.nome, i.telefone, i.cpf, i.email, i.endereco))
+            print('Funcionário removido com sucesso!')            
+
+    def mostrar_funcionarios(self):
+        x = DaoFuncionario.ler()
+
+        if not x:
+            print('Lista de funcionarios vazia!')
+        else:
+            for n, i in enumerate(x):
+                print(f'======== Funcionário {n+1} ========\n'
+                      f'CLT: {i.clt}\n'
+                      f'Nome: {i.nome}\n'
+                      f'Telefone: {i.telefone}\n'
+                      f'CPF: {i.cpf}\n'
+                      f'Email: {i.email}\n'
+                      f'Endereco: {i.endereco}\n')
+

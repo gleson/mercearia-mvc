@@ -1,0 +1,11 @@
+Cliente01 | 99999-1234 | 12345678910 | email_01@email.com | Rua do Cliente, 101
+Cliente02 | 88888-1234 | 23456789101 | email_02@email.com | Rua do Cliente, 102
+Cliente03 | 77777-1234 | 34567891012 | email_03@email.com | Rua do Cliente, 103
+Cliente04 | 66666-1234 | 45678910123 | email_04@email.com | Rua do Cliente, 104
+Cliente05 | 55555-1234 | 56789101234 | email_05@email.com | Rua do Cliente, 105
+Cliente06 | 44444-1234 | 67891012345 | email_06@email.com | Rua do Cliente, 106
+Cliente07 | 33333-1234 | 78910123456 | email_07@email.com | Rua do Cliente, 107
+Cliente08 | 22222-1234 | 89101234567 | email_08@email.com | Rua do Cliente, 108
+Cliente09 | 11111-1234 | 91012345678 | email_09@email.com | Rua do Cliente, 109
+Cliente10 | 99999-4321 | 10123456789 | email_10@email.com | Rua do Cliente, 110
+Cliente11 | 99999-1235 | 02345678910 | email_01@email.com | Rua do Funcionario, 101

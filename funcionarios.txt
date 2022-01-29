@@ -1,0 +1,10 @@
+0001 | Funcionario01 | 99999-1234 | 12345678910 | email_01@email.com | Rua do Funcionario, 101
+0002 | Funcionario02 | 88888-1234 | 23456789101 | email_02@email.com | Rua do Funcionario, 102
+0003 | Funcionario03 | 77777-1234 | 34567891012 | email_03@email.com | Rua do Funcionario, 103
+0004 | Funcionario04 | 66666-1234 | 45678910123 | email_04@email.com | Rua do Funcionario, 104
+0005 | Funcionario05 | 55555-1234 | 56789101234 | email_05@email.com | Rua do Funcionario, 105
+0006 | Funcionario06 | 44444-1234 | 67891012345 | email_06@email.com | Rua do Funcionario, 106
+0007 | Funcionario07 | 33333-1234 | 78910123456 | email_07@email.com | Rua do Funcionario, 107
+0008 | Funcionario08 | 22222-1234 | 89101234567 | email_08@email.com | Rua do Funcionario, 108
+0009 | Funcionario09 | 11111-1234 | 91012345678 | email_09@email.com | Rua do Funcionario, 109
+0010 | Funcionario10 | 99999-4321 | 10123456789 | email_10@email.com | Rua do Funcionario, 110
