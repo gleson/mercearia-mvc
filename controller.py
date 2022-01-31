@@ -1,4 +1,3 @@
-#from sqlalchemy import true
 from models import *
 from dao import *
 from datetime import datetime
@@ -32,8 +31,14 @@ class ControllerCategoria:
                     if i.categoria != categoria_remover:
                         arq.writelines(f'{i.categoria}\n')
             print('Categoria removida com sucesso!')
-            #TODO: COLOCAR 'SEM CATEGORIA' NO ESTOQUE
+        
+        estoque = DaoEstoque.ler()
+        estoque = list(map(lambda x: Estoque(Produtos(x.produto.nome, x.produto.preco, "Sem Categoria"), x.quantidade) 
+                            if (x.produto.categoria == categoria_remover) else (x), estoque))
 
+        open('estoque.txt', 'w').close()
+        for i in estoque:
+            DaoEstoque.salvar(Produtos(i.produto.nome, i.produto.preco, i.produto.categoria), i.quantidade)
 
     def alterar_categoria(self, categoria_antiga, categoria_nova):
         x = DaoCategoria.ler()
@@ -50,8 +55,14 @@ class ControllerCategoria:
                 with open('categorias.txt', 'w') as arq:
                     for i in x:
                         arq.writelines(f'{i.categoria}\n')
-                print(f'Alteração da categoria efetuada com sucesso!')
-                #TODO: ALTERAR TAMBÉM A CATEGORIA DO ESTOQUE
+                print(f'Categoria alterada com sucesso!')
+                estoque = DaoEstoque.ler()
+                estoque = list(map(lambda x: Estoque(Produtos(x.produto.nome, x.produto.preco, categoria_nova), x.quantidade) 
+                                    if (x.produto.categoria == categoria_antiga) else (x), estoque))
+
+                open('estoque.txt', 'w').close()
+                for i in estoque:
+                    DaoEstoque.salvar(Produtos(i.produto.nome, i.produto.preco, i.produto.categoria), i.quantidade)
 
     def mostrar_categoria(self):
         x = DaoCategoria.ler()

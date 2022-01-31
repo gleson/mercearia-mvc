@@ -131,33 +131,3 @@ class DaoFuncionario:
         return func
 
 
-
-
-"""
-#x = Produtos('Laranja', '2', 'Frutas')
-#x = Produtos('Acerola', '5', 'Frutas')
-#y = Venda(x, 'Caio', 'Gleson', 7)
-#z = DaoVenda.salvar(y)
-
-v = DaoVenda.ler()
-
-
-
-print(v[2].item_vendido.nome)
-print(v[2].item_vendido.preco)
-print(v[2].item_vendido.categoria)
-print(v[2].vendedor)
-print(v[2].comprador)
-print(v[2].quantidade_vendida)
-print(v[2].data)
-print(v[2].data)
-
-
-
-#DaoCategoria.salvar('Frutas')
-#DaoCategoria.salvar('Verduras')
-#DaoCategoria.salvar('Legumes')
-
-#DaoCategoria.ler()
-
-"""
