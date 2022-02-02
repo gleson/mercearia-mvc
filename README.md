@@ -2,13 +2,15 @@
 Este projeto é um Sistema MVC desenvolvido em Python, que executa as principais tarefas de uma mercearia ou mercadinho. O armazenamento das operações são efetuadas em arquivos txt.
 
 ### Este sistema contempla as seguintes tabelas:
-
-**Categoria**
-
-*Campos:*
 - Categoria
+- Estoque
+- Fornecedor
+- Cliente
+- Funcionário
+- Vendas
 
-*Operações:*
-- Cadastro
-- Alteração
-- Remoção
+### Ações disponíveis para cada tabela:
+- Cadastrar
+- Remover
+- Alterar
+- Exibir

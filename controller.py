@@ -5,7 +5,7 @@ from datetime import datetime
 
 class ControllerCategoria:
 
-    def cadastra_categoria(self, nova_categoria):
+    def cadastrar_categoria(self, nova_categoria):
         existe = False
         x = DaoCategoria.ler()
 
@@ -40,25 +40,25 @@ class ControllerCategoria:
         for i in estoque:
             DaoEstoque.salvar(Produtos(i.produto.nome, i.produto.preco, i.produto.categoria), i.quantidade)
 
-    def alterar_categoria(self, categoria_antiga, categoria_nova):
+    def alterar_categoria(self, categoria_atual, categoria_nova):
         x = DaoCategoria.ler()
-        cat_ant = list(filter(lambda x: x.categoria == categoria_antiga, x))
+        cat_ant = list(filter(lambda x: x.categoria == categoria_atual, x))
 
         if not cat_ant:
-            print(f'Não existe a categoria {categoria_antiga} para ser alterada!')
+            print(f'Não existe a categoria {categoria_atual} para ser alterada!')
         else:
             cat_nov = list(filter(lambda x: x.categoria == categoria_nova, x))
             if cat_nov:
                 print(f'A categoria {categoria_nova} já existe!')
             else:
-                x = list(map(lambda x: Categoria(categoria_nova) if (x.categoria == categoria_antiga) else x, x))
+                x = list(map(lambda x: Categoria(categoria_nova) if (x.categoria == categoria_atual) else x, x))
                 with open('categorias.txt', 'w') as arq:
                     for i in x:
                         arq.writelines(f'{i.categoria}\n')
                 print(f'Categoria alterada com sucesso!')
                 estoque = DaoEstoque.ler()
                 estoque = list(map(lambda x: Estoque(Produtos(x.produto.nome, x.produto.preco, categoria_nova), x.quantidade) 
-                                    if (x.produto.categoria == categoria_antiga) else (x), estoque))
+                                    if (x.produto.categoria == categoria_atual) else (x), estoque))
 
                 open('estoque.txt', 'w').close()
                 for i in estoque:
@@ -107,17 +107,18 @@ class ControllerEstoque:
             print('O pruduto que deseja remover não existe!')
 
 
-    def alterar_produto(self, nome_anterior, novo_nome, novo_preco, nova_categoria, nova_quantidade):
+    def alterar_produto(self, nome_atual, novo_nome, novo_preco, nova_categoria, nova_quantidade):
         x = DaoEstoque.ler()
         y = DaoCategoria.ler()
         cat = list(filter(lambda y: y.categoria == nova_categoria, y))
 
         if cat:
-            est_ant = list(filter(lambda x: x.produto.nome == nome_anterior, x))
+            est_ant = list(filter(lambda x: x.produto.nome == nome_atual, x))
             if est_ant:
                 est_nov = list(filter(lambda x: x.produto.nome == novo_nome, x))
                 if not est_nov:
-                    k = list(map(lambda x: Estoque(Produtos(novo_nome, novo_preco, nova_categoria), nova_quantidade) if (x.produto.nome == nome_anterior) else x, x))
+                    k = list(map(lambda x: Estoque(Produtos(novo_nome, novo_preco, nova_categoria), nova_quantidade) 
+                                 if (x.produto.nome == nome_atual) else x, x))
                     open('estoque.txt', 'w').close()
                     for i in k:
                         DaoEstoque.salvar(Produtos(i.produto.nome, i.produto.preco, i.produto.categoria), i.quantidade)
